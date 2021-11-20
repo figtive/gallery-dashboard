@@ -32,7 +32,7 @@ jobs:
           cache-from: figtive/gallery-dashboard:latest
           tags: |
             figtive/gallery-dashboard:latest
-            figtive/gallery-dashboard:${{ env.GITHUB_SHA }}
+            figtive/gallery-dashboard:${{ github.sha }}
             figtive/gallery-dashboard:${{ steps.semver_parser.outputs.major }}
             figtive/gallery-dashboard:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}
             figtive/gallery-dashboard:${{ steps.semver_parser.outputs.major }}.${{ steps.semver_parser.outputs.minor }}.${{ steps.semver_parser.outputs.patch }}
@@ -46,4 +46,4 @@ jobs:
           cache-from: figtive/gallery-dashboard:nightly
           tags: |
             figtive/gallery-dashboard:nightly
-            figtive/gallery-dashboard:${{ env.GITHUB_SHA }}
+            figtive/gallery-dashboard:${{ github.sha }}
