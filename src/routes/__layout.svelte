@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { Styles } from 'sveltestrap';
+  import Nav from '$lib/components/NavBar.svelte';
 </script>
 
-<Styles />
-<slot />
+<Nav />
+<div class="container">
+  <slot />
+</div>

@@ -27,8 +27,5 @@
   "type": "module",
   "lint-staged": {
     "*.{js,css,md,html,svelte,ts}": "prettier --write"
-  },
-  "dependencies": {
-    "sveltestrap": "^5.6.3"
   }
 }
