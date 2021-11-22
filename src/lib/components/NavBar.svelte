@@ -48,6 +48,10 @@
       renderGoogleSignIn();
     }
   });
+  const logoutHandler = () => {
+    logout();
+    window.location.reload();
+  };
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -71,6 +75,9 @@
         </li>
       </ul>
       <div id="google-signin" class:hidden={$authStore.isAuthenticated} />
+      {#if $authStore.isAuthenticated}
+        <button class="btn btn-danger" on:click={logoutHandler}>Logout</button>
+      {/if}
     </div>
   </div>
 </nav>
