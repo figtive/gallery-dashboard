@@ -3,6 +3,4 @@
 </script>
 
 <Nav />
-<div class="container">
-  <slot />
-</div>
+<slot />

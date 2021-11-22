@@ -1,4 +1,6 @@
 <script lang="ts">
 </script>
 
-<h1>Gall</h1>
+<div class="container">
+  <h1>Gall</h1>
+</div>

@@ -18,3 +18,18 @@ export interface Course {
   description: string;
   voteQuota: number;
 }
+
+export interface Project {
+  id: string;
+  name: string;
+  team: string;
+  description: string;
+  thumbnail: string[];
+  link: string;
+  video: string;
+  active: boolean;
+  courseId: CourseType;
+  field: ProjectFieldType;
+  metadata?: string;
+  createdAt: string;
+}
