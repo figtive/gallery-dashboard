@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import { auth } from '$lib/api';
+  import api from '$lib/api';
   import { login, logout } from '$lib/auth';
   import { JWT_KEY } from '$lib/constants';
   import { authStore } from '$lib/store';
@@ -24,7 +24,7 @@
     google.accounts.id.initialize({
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: (response: GoogleAuthResponse) => {
-        auth
+        api.auth
           .login(response.credential)
           .then(() => {
             login(response.credential);
@@ -36,7 +36,7 @@
       },
     });
     if (localJwt) {
-      auth
+      api.auth
         .login(localJwt)
         .then(() => {
           login(localJwt);
