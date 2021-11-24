@@ -1,6 +1,6 @@
 import { API_HOST_KEY } from './constants';
 import { logout } from './auth';
-import type { APIResponse, Course, Project } from 'src';
+import type { APIResponse, Blog, Course, Project } from 'src';
 
 const host = () => localStorage.getItem(API_HOST_KEY);
 const baseUrl = () => host() + '/api/v1';
@@ -48,11 +48,19 @@ const project = {
   },
 };
 
+const blog = {
+  getAll: async (): Promise<Blog[]> => {
+    const response = await fetch(baseUrl() + '/coursework/blog');
+    return handleResponse(response);
+  },
+};
+
 const api = {
   auth,
   course,
   coursework: {
     project,
+    blog,
   },
 };
 

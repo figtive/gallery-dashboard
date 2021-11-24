@@ -33,3 +33,12 @@ export interface Project {
   metadata?: string;
   createdAt: string;
 }
+
+export interface Blog {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  category: string;
+  createdAt: string;
+}
