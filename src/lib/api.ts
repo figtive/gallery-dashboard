@@ -71,11 +71,23 @@ const project = {
     const response = await fetch(baseUrl() + '/coursework/project');
     return handleResponse(response);
   },
-  new: async (data: ProjectForm): Promise<Project> => {
+  new: async (project: ProjectForm): Promise<Project> => {
     const response = await fetch(baseUrl() + '/coursework/project', {
       method: 'POST',
       headers: headerBuilder().json().withAuth().build(),
-      body: JSON.stringify(data),
+      body: JSON.stringify(project),
+    });
+    return handleResponse(response);
+  },
+  getOne: async (courseId: string, projectId: string): Promise<Project> => {
+    const response = await fetch(baseUrl() + '/coursework/project/' + courseId + '/' + projectId);
+    return handleResponse(response);
+  },
+  update: async (project: ProjectForm): Promise<null> => {
+    const response = await fetch(baseUrl() + '/coursework/project', {
+      method: 'PUT',
+      headers: headerBuilder().json().withAuth().build(),
+      body: JSON.stringify(project),
     });
     return handleResponse(response);
   },
