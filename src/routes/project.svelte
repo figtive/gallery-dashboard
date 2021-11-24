@@ -2,8 +2,9 @@
   import { onMount } from 'svelte';
 
   import api from '$lib/api';
-  import type { Project } from 'src';
   import GenericTable from '$lib/components/GenericTable.svelte';
+  import util from '$lib/util';
+  import type { Project } from 'src';
 
   let projects: Project[] = [];
   onMount(() => {
@@ -11,7 +12,7 @@
       projects = res;
     });
   });
-  const HEADERS = [
+  const headers = [
     'ID',
     'Name',
     'Team',
@@ -38,9 +39,9 @@
       project.courseId,
       project.field,
       project.metadata,
-      project.createdAt,
+      util.stringDateToDate(project.createdAt),
     ];
   });
 </script>
 
-<GenericTable headers={HEADERS} data={tableData} />
+<GenericTable {headers} data={tableData} />

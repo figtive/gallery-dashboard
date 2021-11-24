@@ -5,14 +5,13 @@
   import GenericTable from '$lib/components/GenericTable.svelte';
   import type { Course } from 'src';
 
-  let HEADERS = ['ID', 'Name', 'Description', 'Vote quota'];
-
   let courses: Course[] = [];
   onMount(() => {
     api.course.getAll().then((res) => {
       courses = res;
     });
   });
+  let headers = ['ID', 'Name', 'Description', 'Vote quota'];
   $: tableData = courses.map((course) => [
     course.id,
     course.name,
@@ -21,4 +20,4 @@
   ]);
 </script>
 
-<GenericTable headers={HEADERS} data={tableData} />
+<GenericTable {headers} data={tableData} />

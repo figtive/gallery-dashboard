@@ -3,6 +3,7 @@
 
   import api from '$lib/api';
   import GenericTable from '$lib/components/GenericTable.svelte';
+  import util from '$lib/util';
   import type { Blog } from 'src';
 
   let blogs: Blog[] = [];
@@ -21,7 +22,7 @@
     blog.author,
     blog.link,
     blog.category,
-    blog.createdAt,
+    util.stringDateToDate(blog.createdAt),
   ]);
 </script>
 
