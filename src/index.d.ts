@@ -28,8 +28,8 @@ export interface Project {
   link: string;
   video: string;
   active: boolean;
-  courseId: CourseType;
-  field: ProjectFieldType;
+  courseId: string;
+  field: string;
   metadata?: string;
   createdAt: string;
 }
@@ -41,4 +41,17 @@ export interface Blog {
   link: string;
   category: string;
   createdAt: string;
+}
+
+export interface ProjectForm {
+  id?: string;
+  name: string;
+  team: string;
+  description: string;
+  link: string;
+  video: string;
+  active: boolean;
+  courseId: string;
+  field: string;
+  metadata?: string;
 }

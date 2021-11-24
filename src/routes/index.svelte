@@ -1,12 +1,16 @@
 <script lang="ts">
   const links = [
     {
+      ref: '/course',
+      text: 'Course',
+    },
+    {
       ref: '/project',
       text: 'Project',
     },
     {
-      ref: '/course',
-      text: 'Course',
+      ref: '/blog',
+      text: 'Blog',
     },
   ];
 </script>

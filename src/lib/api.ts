@@ -1,6 +1,6 @@
-import { API_HOST_KEY } from './constants';
+import { API_HOST_KEY, JWT_KEY } from './constants';
 import { logout } from './auth';
-import type { APIResponse, Blog, Course, Project } from 'src';
+import type { APIResponse, Blog, Course, Project, ProjectForm } from 'src';
 
 const host = () => localStorage.getItem(API_HOST_KEY);
 const baseUrl = () => host() + '/api/v1';
@@ -20,6 +20,31 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
     throw new Error(jsonResponse.error || response.statusText || response.status.toString());
   }
   return jsonResponse.data;
+};
+
+const headerBuilder = function () {
+  let isJson = false;
+  let withAuth = false;
+  return {
+    withAuth: function () {
+      this.withAuth = true;
+      return this;
+    },
+    json: function () {
+      this.isJson = true;
+      return this;
+    },
+    build: function (): HeadersInit {
+      let header: HeadersInit = {};
+      if (this.withAuth) {
+        header.Authorization = `Bearer ${localStorage.getItem(JWT_KEY)}`;
+      }
+      if (this.isJson) {
+        header['Content-Type'] = 'application/json';
+      }
+      return header;
+    },
+  };
 };
 
 const auth = {
@@ -44,6 +69,14 @@ const course = {
 const project = {
   getAll: async (): Promise<Project[]> => {
     const response = await fetch(baseUrl() + '/coursework/project');
+    return handleResponse(response);
+  },
+  new: async (data: ProjectForm): Promise<Project> => {
+    const response = await fetch(baseUrl() + '/coursework/project', {
+      method: 'POST',
+      headers: headerBuilder().json().withAuth().build(),
+      body: JSON.stringify(data),
+    });
     return handleResponse(response);
   },
 };
