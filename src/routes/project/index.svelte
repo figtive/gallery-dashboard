@@ -50,6 +50,6 @@
 
 <div class="container mb-3">
   <h1>Project</h1>
-  <button class="btn btn-primary" on:click={() => goto('/project/new')}>Create</button>
+  <button class="btn btn-primary" on:click={() => goto('/project/new')}>Add new</button>
 </div>
 <GenericTable {headers} data={tableData} />

@@ -70,6 +70,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navs">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle active"
+            href="/"
+            id="tableDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Tables
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="tableDropdown">
+            <li><a class="dropdown-item" href="/course">Course</a></li>
+            <li><a class="dropdown-item" href="/project">Project</a></li>
+            <li><a class="dropdown-item" href="/blog">Blog</a></li>
+          </ul>
+        </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/settings">Settings</a>
         </li>
