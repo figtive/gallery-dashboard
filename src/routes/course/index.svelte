@@ -13,12 +13,12 @@
     });
   });
   let headers = ['ID', 'Name', 'Description', 'Vote quota'];
-  $: tableData = courses.map((course) => [
-    course.id,
-    course.name,
-    course.description,
-    course.voteQuota,
-  ]);
+  $: tableData = courses.map((course) => {
+    return {
+      clickHandler: () => goto('/course/update?id=' + course.id),
+      data: [course.id, course.name, course.description, course.voteQuota],
+    };
+  });
 </script>
 
 <div class="container mb-3">

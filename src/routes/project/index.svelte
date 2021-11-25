@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
 
   import api from '$lib/api';
@@ -27,21 +28,28 @@
     'Created at',
   ];
   $: tableData = projects.map((project) => {
-    return [
-      project.id,
-      project.name,
-      project.team,
-      project.description,
-      project.thumbnail,
-      project.link,
-      project.video,
-      project.active,
-      project.courseId,
-      project.field,
-      project.metadata,
-      util.stringDateToDate(project.createdAt),
-    ];
+    return {
+      clickHandler: () => goto('/project/update?id=' + project.id),
+      data: [
+        project.id,
+        project.name,
+        project.team,
+        project.description,
+        project.thumbnail,
+        project.link,
+        project.video,
+        project.active,
+        project.courseId,
+        project.field,
+        project.metadata,
+        util.stringDateToDate(project.createdAt),
+      ],
+    };
   });
 </script>
 
+<div class="container mb-3">
+  <h1>Project</h1>
+  <button class="btn btn-primary" on:click={() => goto('/project/new')}>Create</button>
+</div>
 <GenericTable {headers} data={tableData} />
