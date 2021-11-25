@@ -45,18 +45,18 @@
     }
   });
   const submitHandler = () => {
-    let request;
+    let request: (project: ProjectForm) => Promise<any>;
     if (projectId === '') {
-      request = api.coursework.project.new(formData);
+      request = api.coursework.project.new;
     } else {
-      request = api.coursework.project.update(formData);
+      request = api.coursework.project.update;
     }
-    request
+    request(formData)
       .then((res: Project | null) => {
         if (projectId === '') {
           goto(`/project/${res.id}`);
         } else {
-          goto(`/course/${projectId}`);
+          goto(`/project/${projectId}`);
         }
       })
       .catch((err) => console.log(err));
@@ -93,7 +93,6 @@
         id="course"
         bind:value={formData.courseId}
       >
-        <option value="" selected>Course</option>
         {#each courses as course (course.id)}
           <option value={course.id}>{course.name}</option>
         {/each}
@@ -102,7 +101,6 @@
     <div class="mb-3">
       <label for="field" class="form-label">Field</label>
       <select class="form-select" aria-label="Select field" id="field" bind:value={formData.field}>
-        <option selected value="">Project field</option>
         {#each Object.keys(ProjectFieldType).map((key) => ProjectFieldType[key]) as field (field)}
           <option value={field}>{ProjectFieldTypeLabel[field]}</option>
         {/each}
