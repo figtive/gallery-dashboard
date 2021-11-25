@@ -1,9 +1,9 @@
 <script lang="ts">
   export let headers: string[];
-  export let data: any[][];
+  export let data: { data: any[]; clickHandler?: () => void }[];
 </script>
 
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       {#each headers as header (header)}
@@ -13,8 +13,8 @@
   </thead>
   <tbody>
     {#each data as row, i (i)}
-      <tr>
-        {#each row as cell, j (j)}
+      <tr on:click={row.clickHandler}>
+        {#each row.data as cell, j (j)}
           <td>{cell}</td>
         {/each}
       </tr>
