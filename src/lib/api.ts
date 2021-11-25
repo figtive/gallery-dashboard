@@ -84,6 +84,13 @@ const course = {
     });
     return await handleResponse(response);
   },
+  delete: async (id: string): Promise<void> => {
+    const response = await fetch(baseUrl() + `/course/${id}`, {
+      method: 'DELETE',
+      headers: headerBuilder().withAuth().build(),
+    });
+    await handleResponse(response);
+  },
 };
 
 const project = {
@@ -111,6 +118,13 @@ const project = {
     });
     return handleResponse(response);
   },
+  delete: async (courseId: string, projectId: string): Promise<void> => {
+    const response = await fetch(baseUrl() + '/coursework/project/' + courseId + '/' + projectId, {
+      method: 'DELETE',
+      headers: headerBuilder().withAuth().build(),
+    });
+    await handleResponse(response);
+  },
 };
 
 const blog = {
@@ -137,6 +151,13 @@ const blog = {
       body: JSON.stringify(blog),
     });
     return handleResponse(response);
+  },
+  delete: async (courseId: string, blogId: string): Promise<void> => {
+    const response = await fetch(baseUrl() + '/coursework/blog/' + courseId + '/' + blogId, {
+      method: 'DELETE',
+      headers: headerBuilder().withAuth().build(),
+    });
+    await handleResponse(response);
   },
 };
 

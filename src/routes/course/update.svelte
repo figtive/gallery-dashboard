@@ -3,6 +3,7 @@
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
 
+  import api from '$lib/api';
   import CourseForm from '$lib/components/forms/CourseForm.svelte';
   import FormHeader from '$lib/components/forms/FormHeader.svelte';
 
@@ -12,9 +13,16 @@
       goto('/course');
     }
   });
+  const deleteHandler = () => {
+    api.course
+      .delete(courseId)
+      .then(() => goto('/course'))
+      .catch((err) => console.error(err));
+  };
 </script>
 
-<div class="container">
+<div class="container mb-3">
   <FormHeader title="Update Course" />
+  <button class="btn btn-danger" on:click={deleteHandler}>Delete</button>
 </div>
 <CourseForm {courseId} />
