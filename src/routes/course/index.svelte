@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
 
   import api from '$lib/api';
@@ -20,4 +21,8 @@
   ]);
 </script>
 
+<div class="container mb-3">
+  <h1>Courses</h1>
+  <button class="btn btn-primary" on:click={() => goto('/course/new')}>Add new</button>
+</div>
 <GenericTable {headers} data={tableData} />

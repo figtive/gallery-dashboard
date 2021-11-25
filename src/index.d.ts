@@ -19,6 +19,13 @@ export interface Course {
   voteQuota: number;
 }
 
+export interface CourseForm {
+  id?: string;
+  name: string;
+  description: string;
+  voteQuota: number;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -34,16 +41,6 @@ export interface Project {
   createdAt: string;
 }
 
-export interface Blog {
-  id: string;
-  title: string;
-  author: string;
-  link: string;
-  category: string;
-  courseId: string;
-  createdAt: string;
-}
-
 export interface ProjectForm {
   id?: string;
   name: string;
@@ -55,6 +52,16 @@ export interface ProjectForm {
   courseId: string;
   field: string;
   metadata?: string;
+}
+
+export interface Blog {
+  id: string;
+  title: string;
+  author: string;
+  link: string;
+  category: string;
+  courseId: string;
+  createdAt: string;
 }
 
 export interface BlogForm {

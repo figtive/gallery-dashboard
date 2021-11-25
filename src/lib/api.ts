@@ -1,6 +1,6 @@
 import { API_HOST_KEY, JWT_KEY } from './constants';
 import { logout } from './auth';
-import type { APIResponse, Blog, BlogForm, Course, Project, ProjectForm } from 'src';
+import type { APIResponse, Blog, BlogForm, Course, CourseForm, Project, ProjectForm } from 'src';
 
 const host = () => localStorage.getItem(API_HOST_KEY);
 const baseUrl = () => host() + '/api/v1';
@@ -63,6 +63,26 @@ const course = {
   getAll: async (): Promise<Course[]> => {
     const response = await fetch(baseUrl() + '/course');
     return handleResponse(response);
+  },
+  new: async (course: CourseForm): Promise<Course> => {
+    const response = await fetch(baseUrl() + '/course', {
+      method: 'POST',
+      headers: headerBuilder().json().withAuth().build(),
+      body: JSON.stringify(course),
+    });
+    return await handleResponse(response);
+  },
+  get: async (id: string): Promise<Course> => {
+    const response = await fetch(baseUrl() + `/course/${id}`);
+    return await handleResponse(response);
+  },
+  update: async (course: CourseForm): Promise<Course> => {
+    const response = await fetch(baseUrl() + `/course`, {
+      method: 'PUT',
+      headers: headerBuilder().json().withAuth().build(),
+      body: JSON.stringify(course),
+    });
+    return await handleResponse(response);
   },
 };
 
