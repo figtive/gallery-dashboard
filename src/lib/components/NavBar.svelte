@@ -3,8 +3,8 @@
 
   import api from '$lib/api';
   import { login, logout } from '$lib/auth';
-  import { JWT_KEY } from '$lib/constants';
-  import { authStore } from '$lib/store';
+  import { API_HOST_KEY, JWT_KEY } from '$lib/constants';
+  import { apiHostStore, authStore } from '$lib/store';
   import type { GoogleAuthResponse } from 'src';
 
   const renderGoogleSignIn = () => {
@@ -47,6 +47,7 @@
     } else {
       renderGoogleSignIn();
     }
+    apiHostStore.set(localStorage.getItem(API_HOST_KEY));
   });
   const logoutHandler = () => {
     logout();
