@@ -125,6 +125,14 @@ const project = {
     });
     await handleResponse(response);
   },
+  updateThumbnail: async (formData: FormData): Promise<void> => {
+    const response = await fetch(baseUrl() + '/coursework/project/thumbnail', {
+      method: 'PUT',
+      headers: headerBuilder().withAuth().build(),
+      body: formData,
+    });
+    await handleResponse(response);
+  },
 };
 
 const blog = {

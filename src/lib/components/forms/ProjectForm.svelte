@@ -89,7 +89,7 @@
   }
 </script>
 
-<div class="container mb-3">
+<div class="container">
   <form on:submit|preventDefault={submitHandler}>
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
