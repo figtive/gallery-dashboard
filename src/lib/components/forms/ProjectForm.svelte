@@ -46,6 +46,10 @@
             field: res.field,
             metadata: res.metadata,
           };
+          const metadata = JSON.parse(res.metadata);
+          metadata.productOwners.push('');
+          metadata.developmentTeam.push('');
+          metadataFormData = metadata;
         })
         .catch((err) => console.log(err));
     }
@@ -59,11 +63,14 @@
     }
     request(formData)
       .then((res: Project | null) => {
-        if (projectId === '') {
-          goto(`/project/${res.id}`);
-        } else {
-          goto(`/project/${projectId}`);
-        }
+        // let id: string;
+        // if (projectId === '') {
+        //   id = res.id;
+        // } else {
+        //   id = projectId;
+        // }
+        // goto(`/project/update?id=${id}`);
+        goto(`/project`);
       })
       .catch((err) => console.log(err));
   };
