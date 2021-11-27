@@ -72,3 +72,10 @@ export interface BlogForm {
   category: string;
   courseId: string;
 }
+
+export interface ProjectMetadata {
+  partner: string;
+  productOwners: string[];
+  scrumMaster: string;
+  developmentTeam: string[];
+}
