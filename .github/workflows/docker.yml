@@ -10,10 +10,10 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: set up docker buildx
         uses: docker/setup-buildx-action@v1
-      - name: provide `.env` file
+      - name: provide staging `.env` file on branch push
         if: ${{ startsWith(github.ref, 'refs/heads') }}
         run: echo "${{ secrets.ENV_FILE_STAGING }}" > .env
-      - name: provide `.env` file
+      - name: provide production `.env` file on tag push
         if: ${{ startsWith(github.ref, 'refs/tags') }}
         run: echo "${{ secrets.ENV_FILE_PRODUCTION }}" > .env
       - name: docker hub authentication
