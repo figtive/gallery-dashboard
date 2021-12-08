@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -9,9 +9,12 @@ const config = {
 
   kit: {
     adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: null,
+      out: 'build',
+      precompress: false,
+      env: {
+        host: 'HOST',
+        port: 'PORT',
+      },
     }),
     // hydrate the <div id="svelte"> element in src/app.html
     target: '#svelte',

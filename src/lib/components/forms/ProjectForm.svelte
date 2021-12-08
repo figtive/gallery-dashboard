@@ -52,13 +52,7 @@
       request = api.coursework.project.update;
     }
     request(formData)
-      .then((res: Project | null) => {
-        if (projectId === '') {
-          goto(`/project/${res.id}`);
-        } else {
-          goto(`/project/${projectId}`);
-        }
-      })
+      .then(() => goto('/project'))
       .catch((err) => console.log(err));
   };
 </script>

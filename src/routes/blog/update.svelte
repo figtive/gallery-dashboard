@@ -5,6 +5,7 @@
 
   import api from '$lib/api';
   import BlogForm from '$lib/components/forms/BlogForm.svelte';
+  import DeleteConfirmationModal from '$lib/components/forms/DeleteConfirmationModal.svelte';
   import FormHeader from '$lib/components/forms/FormHeader.svelte';
 
   let blogId = $page.query.get('id');
@@ -23,6 +24,14 @@
 
 <div class="container mb-3">
   <FormHeader title="Update Blog" />
-  <button class="btn btn-danger" on:click={deleteHandler}>Delete</button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteConfirmationModal"
+  >
+    Delete
+  </button>
 </div>
 <BlogForm {blogId} />
+<DeleteConfirmationModal onConfirm={deleteHandler} />

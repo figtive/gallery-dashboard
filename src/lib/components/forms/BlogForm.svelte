@@ -42,13 +42,7 @@
       request = api.coursework.blog.update;
     }
     request(formData)
-      .then((res) => {
-        if (blogId === '') {
-          goto(`/blog/${res.id}`);
-        } else {
-          goto(`/blog/${blogId}`);
-        }
-      })
+      .then(() => goto(`/blog`))
       .catch((err) => console.log(err));
   };
 </script>
