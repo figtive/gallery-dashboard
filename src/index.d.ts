@@ -41,6 +41,13 @@ export interface Project {
   createdAt: string;
 }
 
+export interface ProjectMetadata {
+  partner: string;
+  productOwner: string;
+  scrumMaster: string;
+  developmentTeam: string[];
+}
+
 export interface ProjectForm {
   id?: string;
   name: string;
@@ -71,11 +78,4 @@ export interface BlogForm {
   link: string;
   category: string;
   courseId: string;
-}
-
-export interface ProjectMetadata {
-  partner: string;
-  productOwners: string[];
-  scrumMaster: string;
-  developmentTeam: string[];
 }
