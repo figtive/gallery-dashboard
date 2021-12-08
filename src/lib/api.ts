@@ -133,6 +133,17 @@ const project = {
     });
     await handleResponse(response);
   },
+  deleteThumbnail: async (projectId: string, thumbnailPath: string): Promise<void> => {
+    const response = await fetch(baseUrl() + '/coursework/project/thumbnail', {
+      method: 'DELETE',
+      headers: headerBuilder().withAuth().json().build(),
+      body: JSON.stringify({
+        id: projectId,
+        thumbnail: thumbnailPath,
+      }),
+    });
+    await handleResponse(response);
+  },
 };
 
 const blog = {

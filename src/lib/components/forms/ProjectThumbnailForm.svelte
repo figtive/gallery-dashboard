@@ -26,6 +26,12 @@
       .then(() => updateProject())
       .catch((err) => console.error(err));
   };
+  const deleteHandler = (thumbnailPath) => {
+    api.coursework.project
+      .deleteThumbnail(project.id, thumbnailPath)
+      .then(() => updateProject())
+      .catch((err) => console.error(err));
+  };
 </script>
 
 <div class="container">
@@ -46,13 +52,27 @@
     {#if project}
       {#each project.thumbnail as thumbnail (thumbnail)}
         <li class="list-group-item">
-          <img
-            src={window.localStorage.getItem(STATIC_BASE_URL_KEY) + thumbnail}
-            class="img-fluid"
-            alt={thumbnail}
-          />
+          <div class="thumbnail-container">
+            <img
+              src={window.localStorage.getItem(STATIC_BASE_URL_KEY) + thumbnail}
+              class="img-fluid mb-3"
+              alt={thumbnail}
+            />
+            <div>
+              <button class="btn btn-danger" on:click={() => deleteHandler(thumbnail)}>
+                Delete
+              </button>
+            </div>
+          </div>
         </li>
       {/each}
     {/if}
   </ul>
 </div>
+
+<style>
+  .thumbnail-container {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
