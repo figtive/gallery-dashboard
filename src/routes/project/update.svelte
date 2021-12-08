@@ -5,6 +5,7 @@
 
   import api from '$lib/api';
   import FormHeader from '$lib/components/forms/FormHeader.svelte';
+  import DeleteConfirmationModal from '$lib/components/forms/DeleteConfirmationModal.svelte';
   import ProjectForm from '$lib/components/forms/ProjectForm.svelte';
   import ProjectThumbnailForm from '$lib/components/forms/ProjectThumbnailForm.svelte';
 
@@ -24,7 +25,14 @@
 
 <div class="container mb-3">
   <FormHeader title="Update Project" />
-  <button class="btn btn-danger" on:click={deleteHandler}>Delete</button>
+  <button
+    type="button"
+    class="btn btn-danger"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteConfirmationModal"
+  >
+    Delete
+  </button>
 </div>
 <div class="mb-3">
   <ProjectForm {projectId} />
@@ -32,3 +40,4 @@
 <div class="mb-3">
   <ProjectThumbnailForm {projectId} />
 </div>
+<DeleteConfirmationModal onConfirm={deleteHandler} />

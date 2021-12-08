@@ -62,16 +62,7 @@
       request = api.coursework.project.update;
     }
     request(formData)
-      .then((res: Project | null) => {
-        // let id: string;
-        // if (projectId === '') {
-        //   id = res.id;
-        // } else {
-        //   id = projectId;
-        // }
-        // goto(`/project/update?id=${id}`);
-        goto(`/project`);
-      })
+      .then(() => goto('/project'))
       .catch((err) => console.log(err));
   };
   $: if (metadataFormData.productOwners[metadataFormData.productOwners.length - 1] !== '') {
