@@ -1,4 +1,5 @@
 export const API_HOST_KEY = 'API_HOST';
+export const STATIC_BASE_URL_KEY = 'STATIC_BASE_URL';
 export const JWT_KEY = 'JWT';
 
 export enum ProjectFieldType {

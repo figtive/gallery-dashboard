@@ -21,11 +21,13 @@
   };
   let metadataFormData: ProjectMetadata = {
     partner: '',
-    productOwners: [''],
+    productOwner: '',
     scrumMaster: '',
     developmentTeam: [''],
   };
   onMount(() => {
+    console.log('here');
+
     api.course
       .getAll()
       .then((res) => (courses = res))
@@ -47,7 +49,6 @@
             metadata: res.metadata,
           };
           const metadata = JSON.parse(res.metadata);
-          metadata.productOwners.push('');
           metadata.developmentTeam.push('');
           metadataFormData = metadata;
         })
@@ -65,9 +66,6 @@
       .then(() => goto('/project'))
       .catch((err) => console.log(err));
   };
-  $: if (metadataFormData.productOwners[metadataFormData.productOwners.length - 1] !== '') {
-    metadataFormData.productOwners.push('');
-  }
   $: if (metadataFormData.developmentTeam[metadataFormData.developmentTeam.length - 1] !== '') {
     metadataFormData.developmentTeam.push('');
   }
@@ -75,7 +73,6 @@
     // https://stackoverflow.com/a/25921504
     const metadata = JSON.parse(JSON.stringify(metadataFormData));
     metadata.developmentTeam.splice(-1);
-    metadata.productOwners.splice(-1);
     formData.metadata = JSON.stringify(metadata);
   }
 </script>
@@ -137,40 +134,14 @@
       />
     </div>
     <div class="mb-3">
-      <label for="productOwners" class="form-label">Product Owner</label>
+      <label for="productOwner" class="form-label">Product Owner</label>
       <input
         type="text"
         class="form-control"
-        id="productOwners"
-        placeholder="Add new"
-        bind:value={metadataFormData.productOwners[0]}
+        id="productOwner"
+        bind:value={metadataFormData.productOwner}
       />
     </div>
-    {#each metadataFormData.productOwners as productOwner, i (i)}
-      {#if i > 0}
-        <div class="mb-3 input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Add new"
-            aria-describedby="remove-productOwners-{i}"
-            bind:value={productOwner}
-          />
-          <button
-            class="btn btn-danger"
-            type="button"
-            id="remove-productOwners-{i}"
-            disabled={i === metadataFormData.productOwners.length - 1 && productOwner === ''}
-            on:click={() => {
-              metadataFormData.productOwners = [
-                ...metadataFormData.productOwners.slice(0, i),
-                ...metadataFormData.productOwners.slice(i + 1),
-              ];
-            }}>-</button
-          >
-        </div>
-      {/if}
-    {/each}
     <div class="mb-3">
       <label for="developmentTeam" class="form-label">Development Team</label>
       <input
