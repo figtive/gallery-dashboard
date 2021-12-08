@@ -26,8 +26,6 @@
     developmentTeam: [''],
   };
   onMount(() => {
-    console.log('here');
-
     api.course
       .getAll()
       .then((res) => (courses = res))
