@@ -7,6 +7,7 @@
   import FormHeader from '$lib/components/forms/FormHeader.svelte';
   import DeleteConfirmationModal from '$lib/components/forms/DeleteConfirmationModal.svelte';
   import ProjectForm from '$lib/components/forms/ProjectForm.svelte';
+  import ProjectThumbnailForm from '$lib/components/forms/ProjectThumbnailForm.svelte';
 
   let projectId = $page.query.get('id');
   onMount(() => {
@@ -33,5 +34,10 @@
     Delete
   </button>
 </div>
-<ProjectForm {projectId} />
+<div class="mb-3">
+  <ProjectForm {projectId} />
+</div>
+<div class="mb-3">
+  <ProjectThumbnailForm {projectId} />
+</div>
 <DeleteConfirmationModal onConfirm={deleteHandler} />

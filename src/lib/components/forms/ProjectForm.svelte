@@ -4,7 +4,7 @@
 
   import api from '$lib/api';
   import { ProjectFieldType, ProjectFieldTypeLabel } from '$lib/constants';
-  import type { Course, Project, ProjectForm } from 'src';
+  import type { Course, Project, ProjectForm, ProjectMetadata } from 'src';
 
   export let projectId: string = '';
   let courses: Course[] = [];
@@ -17,7 +17,13 @@
     active: false,
     courseId: '',
     field: '',
-    metadata: '{}',
+    metadata: JSON.stringify({}),
+  };
+  let metadataFormData: ProjectMetadata = {
+    partner: '',
+    productOwner: '',
+    scrumMaster: '',
+    developmentTeam: [''],
   };
   onMount(() => {
     api.course
@@ -40,6 +46,9 @@
             field: res.field,
             metadata: res.metadata,
           };
+          const metadata = JSON.parse(res.metadata);
+          metadata.developmentTeam.push('');
+          metadataFormData = metadata;
         })
         .catch((err) => console.log(err));
     }
@@ -55,6 +64,15 @@
       .then(() => goto('/project'))
       .catch((err) => console.log(err));
   };
+  $: if (metadataFormData.developmentTeam[metadataFormData.developmentTeam.length - 1] !== '') {
+    metadataFormData.developmentTeam.push('');
+  }
+  $: {
+    // https://stackoverflow.com/a/25921504
+    const metadata = JSON.parse(JSON.stringify(metadataFormData));
+    metadata.developmentTeam.splice(-1);
+    formData.metadata = JSON.stringify(metadata);
+  }
 </script>
 
 <div class="container">
@@ -100,7 +118,64 @@
         {/each}
       </select>
     </div>
-    <div class="form-check">
+    <div class="mb-3">
+      <label for="partner" class="form-label">Partner</label>
+      <input type="text" class="form-control" id="partner" bind:value={metadataFormData.partner} />
+    </div>
+    <div class="mb-3">
+      <label for="scrumMaster" class="form-label">Scrum Master</label>
+      <input
+        type="text"
+        class="form-control"
+        id="scrumMaster"
+        bind:value={metadataFormData.scrumMaster}
+      />
+    </div>
+    <div class="mb-3">
+      <label for="productOwner" class="form-label">Product Owner</label>
+      <input
+        type="text"
+        class="form-control"
+        id="productOwner"
+        bind:value={metadataFormData.productOwner}
+      />
+    </div>
+    <div class="mb-3">
+      <label for="developmentTeam" class="form-label">Development Team</label>
+      <input
+        type="text"
+        class="form-control"
+        id="developmentTeam"
+        placeholder="Add new"
+        bind:value={metadataFormData.developmentTeam[0]}
+      />
+    </div>
+    {#each metadataFormData.developmentTeam as developmentTeam, i (i)}
+      {#if i > 0}
+        <div class="mb-3 input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Add new"
+            aria-describedby="remove-developmentTeam-{i}"
+            bind:value={developmentTeam}
+          />
+          <button
+            class="btn btn-danger"
+            type="button"
+            id="remove-developmentTeam-{i}"
+            disabled={i === metadataFormData.developmentTeam.length - 1 && developmentTeam === ''}
+            on:click={() => {
+              metadataFormData.developmentTeam = [
+                ...metadataFormData.developmentTeam.slice(0, i),
+                ...metadataFormData.developmentTeam.slice(i + 1),
+              ];
+            }}>-</button
+          >
+        </div>
+      {/if}
+    {/each}
+    <div class="form-check mb-3">
       <input type="checkbox" class="form-check-input" id="active" bind:checked={formData.active} />
       <label class="form-check-label" for="active"> Active </label>
     </div>
