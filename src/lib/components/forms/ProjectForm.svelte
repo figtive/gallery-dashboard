@@ -14,7 +14,7 @@
     description: '',
     link: '',
     video: '',
-    active: false,
+    active: true,
     courseId: '',
     field: '',
     metadata: JSON.stringify({}),
@@ -94,7 +94,7 @@
       <input type="url" class="form-control" id="link" bind:value={formData.link} />
     </div>
     <div class="mb-3">
-      <label for="video" class="form-label">Video</label>
+      <label for="video" class="form-label">Video ID</label>
       <input type="url" class="form-control" id="video" bind:value={formData.video} />
     </div>
     <div class="mb-3">
@@ -104,7 +104,11 @@
         aria-label="Select course ID"
         id="course"
         bind:value={formData.courseId}
+        disabled={courses.length === 0}
       >
+        {#if courses.length === 0}
+          <option value="" disabled>Please add Courses first</option>
+        {/if}
         {#each courses as course (course.id)}
           <option value={course.id}>{course.name}</option>
         {/each}
@@ -113,7 +117,9 @@
     <div class="mb-3">
       <label for="field" class="form-label">Field</label>
       <select class="form-select" aria-label="Select field" id="field" bind:value={formData.field}>
-        {#each Object.keys(ProjectFieldType).map((key) => ProjectFieldType[key]) as field (field)}
+        {#each Object.keys(ProjectFieldType)
+          .filter((key) => ProjectFieldType[key] !== ProjectFieldType.All)
+          .map((key) => ProjectFieldType[key]) as field (field)}
           <option value={field}>{ProjectFieldTypeLabel[field]}</option>
         {/each}
       </select>
@@ -177,7 +183,7 @@
     {/each}
     <div class="form-check mb-3">
       <input type="checkbox" class="form-check-input" id="active" bind:checked={formData.active} />
-      <label class="form-check-label" for="active"> Active </label>
+      <label class="form-check-label" for="active">Active</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
