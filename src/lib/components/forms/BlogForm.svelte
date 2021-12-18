@@ -68,8 +68,11 @@
         aria-label="Select course ID"
         id="course"
         bind:value={formData.courseId}
+        disabled={courses.length === 0}
       >
-        <option value="" selected>Course</option>
+        {#if courses.length === 0}
+          <option value="" disabled>Please add Courses first</option>
+        {/if}
         {#each courses as course (course.id)}
           <option value={course.id}>{course.name}</option>
         {/each}
@@ -83,7 +86,9 @@
         id="category"
         bind:value={formData.category}
       >
-        {#each Object.keys(BlogCategoryType).map((key) => BlogCategoryType[key]) as category (category)}
+        {#each Object.keys(BlogCategoryType)
+          .filter((key) => BlogCategoryType[key] !== BlogCategoryType.All)
+          .map((key) => BlogCategoryType[key]) as category (category)}
           <option value={category}>{BlogCategoryTypeLabel[category]}</option>
         {/each}
       </select>
