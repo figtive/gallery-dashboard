@@ -95,7 +95,7 @@
     </div>
     <div class="mb-3">
       <label for="video" class="form-label">Video ID</label>
-      <input type="url" class="form-control" id="video" bind:value={formData.video} />
+      <input type="text" class="form-control" id="video" bind:value={formData.video} />
     </div>
     <div class="mb-3">
       <label for="course" class="form-label">Course</label>
