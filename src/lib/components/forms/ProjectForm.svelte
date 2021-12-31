@@ -23,6 +23,7 @@
     partner: '',
     productOwner: '',
     scrumMaster: '',
+    devOps: '',
     developmentTeam: [''],
   };
   onMount(() => {
@@ -129,6 +130,15 @@
       <input type="text" class="form-control" id="partner" bind:value={metadataFormData.partner} />
     </div>
     <div class="mb-3">
+      <label for="productOwner" class="form-label">Product Owner</label>
+      <input
+        type="text"
+        class="form-control"
+        id="productOwner"
+        bind:value={metadataFormData.productOwner}
+      />
+    </div>
+    <div class="mb-3">
       <label for="scrumMaster" class="form-label">Scrum Master</label>
       <input
         type="text"
@@ -138,13 +148,8 @@
       />
     </div>
     <div class="mb-3">
-      <label for="productOwner" class="form-label">Product Owner</label>
-      <input
-        type="text"
-        class="form-control"
-        id="productOwner"
-        bind:value={metadataFormData.productOwner}
-      />
+      <label for="devOps" class="form-label">DevOps</label>
+      <input type="text" class="form-control" id="devOps" bind:value={metadataFormData.devOps} />
     </div>
     <div class="mb-3">
       <label for="developmentTeam" class="form-label">Development Team</label>
