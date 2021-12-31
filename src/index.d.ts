@@ -45,6 +45,7 @@ export interface ProjectMetadata {
   partner: string;
   productOwner: string;
   scrumMaster: string;
+  devOps: string;
   developmentTeam: string[];
 }
 
